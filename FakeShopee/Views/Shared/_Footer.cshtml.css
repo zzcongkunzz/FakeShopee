@@ -1,0 +1,65 @@
+﻿
+
+.footer-Seperate{
+    background-color:rgb(238,77,45);
+    width: 100%;
+    height: 5px;
+}
+.footer-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: var(--text-color);
+    max-width: 100%;
+    padding: 0 20px;
+    text-align: center;
+}
+.footer-container__line1{
+    text-transform:uppercase;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.footer-container__line1--item{
+    display: block;
+    padding:0px 25px;
+    text-decoration: none;
+    color: var(--text-color);
+    border-right: 2px solid #ccc;
+}
+
+.footer-container__line1--item:last-child{
+    border-right: none;
+}
+
+.footer-container__line1--item:hover{
+    cursor: context-menu;
+}
+
+.footer-container__line1--item span:hover{
+    cursor: pointer;
+}
+
+.footer-container__line2{
+    display: block;
+    width: 120px;
+    height: 45px;
+    background-image: url(img/đakbôcngthuongblue.png);
+    background-size: cover;
+    margin-top: 40px;
+}
+
+.footer-container__line3{
+    margin-top: 20px;
+}
+
+.footer-container__line{
+    margin: 6px 0;
+}
+
+.footer-container__line:last-child{
+    margin-bottom: 50px;
+}
