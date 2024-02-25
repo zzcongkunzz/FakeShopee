@@ -1,22 +1,20 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FakeShopee.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FakeShopee.Controllers;
 
-public class HomeController : Controller
+public class LoginAndSignupController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
     private MyDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger, MyDbContext context)
+    public LoginAndSignupController(MyDbContext context)
     {
-        _logger = logger;
         _context = context;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Login()
     {
         var users = await _context.UserGroups.ToListAsync();
         // User user = 
@@ -24,10 +22,20 @@ public class HomeController : Controller
         // users.ForEach(user=>{
         //     Console.WriteLine(user.FullName);
         // });
+        // return View();
+        return View();
+    }
+
+    public IActionResult Register(){
         return View();
     }
 
     public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    public IActionResult Index()
     {
         return View();
     }

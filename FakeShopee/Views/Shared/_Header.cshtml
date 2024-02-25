@@ -1,0 +1,53 @@
+﻿
+<div class="header">
+    <div class="grid">
+        <partial name="HeaderNav"/>
+        <div class="header-mix">
+            <div class="header-mix__logo">
+                <a href="./index.html">
+                    <img src="img/logo.png" alt="lỗi logo" id="logo">
+                </a>
+            </div>
+            <div class="header-mix__search">
+                <form style="display: flex; flex: 1" class="form-search" >
+                    <div class="input--search-Wrap">
+                        <input placeholder="Tìm sản phẩm, thương hiệu, và tên shop" autocomplete="off"
+                               type="text" name="search" id="search" class="input--search">
+                        <div class="header--search-history">
+                            <h6>Lịch sử Tìm Kiếm</h6>
+                            <ul>
+                                <li>cá hồi</li>
+                                <li>set lẩu</li>
+                                <li>hack nasa with html</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="button--search" type="button">
+                        <i class="fas fa-search icon--search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="header-mix__cart">
+                <a href="./LoginAndSignup/shoppingcart/shoppingcart.html">
+                    <i class="fas fa-shopping-cart icon--cart"></i>
+                </a>
+                <span class="header-mix__cart-notice">
+                    0
+                </span>
+                <div id="header-mix__cart--main" class="">
+                    <img class="header-cart--img" src="img/pngfind.com-cart-png-2727925.png"
+                         alt="lỗi ảnh">
+                    <p class="header-cart--txt">
+                        Chưa có sản phẩm
+                    </p>
+                    <h4 class="header-mix__cart-heading">Sản phẩm đã thêm</h4>
+                    <div class="header-mix__cart-list-item">
+                        <partial name="HeaderCarProduct"/>
+                    </div>
+                    <a href="" class="header-mix__cart-list-button">Xem Giỏ Hàng</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

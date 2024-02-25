@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FakeShopee.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,8 +15,8 @@ namespace FakeShopee.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,8 +27,8 @@ namespace FakeShopee.Migrations
                 name: "UserGroup",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,17 +39,17 @@ namespace FakeShopee.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(1000)", nullable: false),
-                    LinkImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rating = table.Column<double>(type: "float", nullable: false),
-                    Favorite = table.Column<bool>(type: "bit", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    Discount = table.Column<int>(type: "int", nullable: false),
-                    InventoryQuantity = table.Column<int>(type: "int", nullable: false),
-                    WarehouseQuantity = table.Column<int>(type: "int", nullable: false),
-                    SoldQuantity = table.Column<int>(type: "int", nullable: false),
+                    LinkImage = table.Column<string>(type: "TEXT", nullable: false),
+                    Rating = table.Column<double>(type: "REAL", nullable: false),
+                    Favorite = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Price = table.Column<long>(type: "INTEGER", nullable: false),
+                    Discount = table.Column<int>(type: "INTEGER", nullable: false),
+                    InventoryQuantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    WarehouseQuantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    SoldQuantity = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductImportDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -67,13 +67,13 @@ namespace FakeShopee.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserGroupId = table.Column<Guid>(type: "TEXT", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: true),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Gender = table.Column<int>(type: "INTEGER", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(1000)", nullable: true)
                 },
                 constraints: table =>
@@ -91,10 +91,10 @@ namespace FakeShopee.Migrations
                 name: "Cart",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Quantity = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,13 +117,13 @@ namespace FakeShopee.Migrations
                 name: "Order",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StaffId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReceivedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalPrice = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    StaffId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ReceivedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TotalPrice = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,13 +146,13 @@ namespace FakeShopee.Migrations
                 name: "OrderDetail",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    Discount = table.Column<int>(type: "int", nullable: false),
-                    IntoMoney = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    OrderId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    Price = table.Column<long>(type: "INTEGER", nullable: false),
+                    Discount = table.Column<int>(type: "INTEGER", nullable: false),
+                    IntoMoney = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

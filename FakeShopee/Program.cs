@@ -5,10 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<MyDbContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("MyDb"));
-});
+builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlite(       
+    builder.Configuration.GetConnectionString("DefaultConnection")       
+)); 
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
