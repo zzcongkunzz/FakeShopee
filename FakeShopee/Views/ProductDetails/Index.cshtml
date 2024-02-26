@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Product Details Page";
+    Layout = "_MainLayout";
+}
+
+<div class="container">
+    <div class="product grid">
+        <div class="product__img"></div>
+        <div class="product_box">
+            <span class="product__name">áo khoác nữ sinh Harajuku JK 100% ảnh thật áo khoác nữ sinh Harajuku</span>
+            <div class="product_box--line2">
+                <div class="product__rating line">
+                    <p class="product__rating--point">3.0</p>
+                    <div class="product__rating-list-star line">
+                        <div class="product__rating--star">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="product__rating--star">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="product__rating--star">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="product__rating--star">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="product__rating--star">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product__sold line">
+                    <div class="product__sold-item">1700</div>
+                    <div class="product__sold-item">Đã Bán</div>
+                </div>
+            </div>
+            <div class="product_box--line3">
+                <div class="product__old-price">
+                    <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
+                    <span class="product__price">2000000000</span>
+                </div>
+                <div class="product__new-price">
+                    <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
+                    <span class="product__price">400000</span>
+                </div>
+                <div class="product__discount">
+                    <div class="product__discount--item">50%</div>
+                    <div class="product__discount--item">GIẢM</div>
+                </div>
+            </div>
+
+            <div class="product_box-line4 line">
+                <span class="product_box-line4__text">Vận Chuyển</span>
+                <div class="transport">
+                    <div class="transport__icon"></div>
+                    <span class="transport__text">Miễn phí vận chuyển</span>
+                </div>
+            </div>
+            <div class="product_box-line5">
+                <span class="product_box__amouny--text">Số Lượng</span>
+                <div class="product_box__amouny">
+                    <div class="product_box__amouny--item product_box__subtraction">
+                        <i class="fa-solid fa-minus"></i>
+                    </div>
+                    <input type="Text" class="product_box__amouny--item product_box__amouny--vallue" value="1"></input>
+                    <div class="product_box__amouny--item product_box__add">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                </div>
+                <div class="product_box__warehouse">
+                    <span class="product_box__warehouse--item product_box__warehouse--value">235</span>
+                    <span class="product_box__warehouse--item">sản phẩm có sẵn</span>
+                </div>
+            </div>
+
+            <div class="product_box-line6">
+                <a id="btnThemGioHang" href="" class="product_box__add-cart">
+                    <div class="product_box__add-cart--icon">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </div>
+                    <span class="product_box__add-cart--text">Thêm Vào Giỏ Hàng</span>
+                </a>
+                <button class="product_box__buy-now">Mua Ngay</button>
+            </div>
+        </div>
+    </div>
+
+</div>
