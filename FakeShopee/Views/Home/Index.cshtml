@@ -3,7 +3,104 @@
     Layout = "_MainLayout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    
+    <partial name="HomeBanner"/>
+
+    <div class="grid__row grid">
+        <div class="category grid__column2">
+            <h3 class="category__heading">
+                <i class="fa-solid fa-bars"></i>
+                <span class="category__heading-text">
+                    Danh Mục
+                </span>
+            </h3>
+
+            <ul class="category-list">
+                <li class="category-item category-item-follow">
+                    <a href="#" class="category-item-link">Thời Trang Nam</a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-item-link">Điện Thoại & Phụ Kiện</a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-item-link">Thiết Bị Điện Tử</a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-item-link">Máy Tính & Laptop</a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-item-link">Sức Khỏe</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="product">
+            <div class="product-header">
+                <div class="product-header-left">
+                    <p class="product-title">Sắp xếp theo</p>
+                    <a class="product-header__item product-header__item-follow">Phổ Biến</a>
+                    <a class="product-header__item">Mới Nhất</a>
+                    <a class="product-header__item">Bán Chạy</a>
+                    <div class="product-header__item">
+                        <p class="product-header__item--price-text">Giá</p>
+                        <i class="fa-solid fa-angle-down"></i>
+                        <div class="product-header-sort_price"> 
+                            <a class="product-header-sort_price__item">Giá: Thấp đến Cao</a>
+                            <br>
+                            <a class="product-header-sort_price__item">Giá: Cao đến Thấp</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="product-header-right">
+                    <div class="product-title">
+                        <div class="product-header__index">1</div>
+                        <div class="product-header__sum">/16</div>
+                    </div>
+                    <div class="product-next_and_previous_page">
+                        <div class="product-header__item product-header-previous_page">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+                        <div class="product-header__item product-header-next_page">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="product-list ">
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+                <partial name="HomeProductItem"/>
+            </div>
+
+            <div class="product-page_number">
+                <a href="#" class="product-page_number__item">
+                    <i class="fa-solid fa-angle-left"></i>
+                </a>
+                <a href="#" class="product-page_number__item product-page_number__item--follow">1</a>
+                <a href="#" class="product-page_number__item">2</a>
+                <a href="#" class="product-page_number__item">3</a>
+                <a href="#" class="product-page_number__item">4</a>
+                <a href="#" class="product-page_number__item">5</a>
+                <a href="#" class="product-page_number__item">...</a>
+                <a href="#" class="product-page_number__item">14</a>
+                <a href="#" class="product-page_number__item">
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
 </div>

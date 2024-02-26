@@ -1,14 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<<html> lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - FakeShopee</title>
-
-    <!-- Style -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/FakeShopee.styles.css" asp-append-version="true"/>
 
     <!-- kiểu chữ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +18,11 @@
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
+    <!-- Style -->
+        @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/> *@
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/FakeShopee.styles.css" asp-append-version="true"/>
+    
     <!-- icon trên thanh công cụ -->
     <link rel="icon"
           href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4vc7ajSAFRMXR8hzNIIv9NDgYs1kT8PE3rg&usqp=CAU"
@@ -31,19 +31,19 @@
 </head>
 <body>
 <header>
-    <partial name="_Header"/>
+    <partial name="Header"/>
 </header>
 <div class="container">
-    <main role="main" class="pb-3">
+    <main role="main">
         @RenderBody()
     </main>
 </div>
 
 <footer>
-    <partial name="_Footer"/>
+    <partial name="Footer"/>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

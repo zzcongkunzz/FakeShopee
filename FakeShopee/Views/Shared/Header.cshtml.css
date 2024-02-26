@@ -75,7 +75,7 @@
     background-color: rgb(241, 241, 241);
 
 }
-.header--search-history h6{
+.header--search-history h3{
     opacity: 0.2;
     font-weight: 400;
 }
@@ -85,7 +85,7 @@
 }
 
 .header--search-history li,
-.header--search-history h6{
+.header--search-history h3{
     padding: 10px;
 }
 
@@ -167,7 +167,7 @@
 
 .header-cart--txt{
     font-size: 1.6rem;
-    padding: 0px 0 40px;
+    padding: 0 0 40px;
     display: none;
 }
 

@@ -1,0 +1,139 @@
+﻿
+.product-item {
+    /* box-sizing: content-box; */
+    width: 190px;
+    height: 295px;
+    background-color: var(--while-color);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    text-decoration: none;
+    color: var(--text-color);
+
+    /* text-align: center; */
+    position: relative;
+    top: 0;
+
+}
+
+.product-item:hover {
+    top: -3px;
+    cursor: pointer;
+    border: 0.1px solid rgb(238, 77, 45);
+    transition: top linear 0.2s;
+}
+
+.product-item__img {
+    background-image: url(img/sanpham1.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 192px;
+}
+
+.product-item-content {
+    background-color: var(--while-color);
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    padding: 10px;
+}
+
+.product-item__review {
+    font-weight: normal;
+    /* display: block; */
+    height: 32px;
+    /* letter-spacing: 1px; làm chữ cách xa nhau ra */
+    overflow: hidden;
+    display: -webkit-box;
+    -weight-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* text-decoration: line-through; */
+
+
+}
+
+.produc-item-sell {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    line-height: 20px;
+    align-items: baseline;
+}
+
+.product-item-combox-price {
+    color: #ee4d2d;
+}
+
+.product-item__currency-unit {
+    display: inline-block;
+    font-size: 1.2rem;
+    text-decoration: underline;
+}
+
+.product-item__price {
+    font-size: 1.8rem;
+    margin-left: -2px;
+}
+
+.product-item__Quantity-purchased {
+    font-weight: 350;
+    color: #666;
+}
+
+.produc-item__favourite {
+    position: absolute;
+    top: 8px;
+    left: -3px;
+    background-color: rgb(242, 82, 32);
+    color: var(--while-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0px 5px;
+    border-radius: 0 2px 2px 0;
+    line-height: 1.6rem;
+}
+
+.produc-item__favourite::before {
+    content: "";
+    position: absolute;
+    border-top: 5px solid rgb(242, 82, 32);
+    border-left: 4px solid transparent;
+    top: 100%;
+    left: 0;
+    filter: brightness(70%);
+}
+
+.produc-item__sale_off {
+    position: absolute;
+    color: var(--while-color);
+    top: 0;
+    right: 0;
+    background-color: rgb(230, 191, 33);
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 4px 2.5px;
+    font-weight: 500;
+}
+
+.produc-item__sale_off p {
+    display: block;
+    color: var(--while-color);
+}
+
+.produc-item__sale_off .produc-item__sale_off--text {
+    color: red;
+}
+
+.produc-item__sale_off::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    right: 0;
+    /* border: 10px solid; */
+    border-style: solid;
+    border-width: 0px 17.5px 7.7px;
+    border-color: transparent rgb(230, 191, 33) transparent rgb(230, 191, 33);
+    z-index: 1;
+}

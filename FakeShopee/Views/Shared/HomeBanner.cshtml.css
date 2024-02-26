@@ -1,0 +1,117 @@
+﻿.banner {
+    background-color: var(--while-color);
+}
+
+.banner-combox {
+    margin-top: 120px;
+    display: flex;
+    padding-top: 30px;
+    align-items: stretch;
+}
+
+.banner__chinh {
+    flex: 2;
+    height: 235px;
+    background-image: url(img/baner1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+.banner__phu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner__phu--1 {
+    flex: 1;
+    background-image: url(img/baner2.1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+}
+
+.banner__phu--2 {
+    margin-top: 5px;
+    flex: 1;
+    background-image: url(img/baner2.2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+}
+
+.banner-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.banner-list__item {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-decoration: none;
+    width: 100px;
+    height: 108px;
+    text-align: center;
+    margin-top: 30px;
+    transition: margin-top linear 0.1s;
+
+}
+
+.banner-list__item:hover {
+    margin-top: 28px;
+}
+
+.banner-list__item--text {
+    margin-top: 10px;
+    color: var(--text-color);
+    font-size: 1.3rem;
+    line-height: 1.4em;
+}
+
+.banner-list__item--icon {
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.banner-list__item--icon1 {
+    background-image: url(img/banner-icon1.png);
+}
+
+.banner-list__item--icon2 {
+    background-image: url(img/banner-icon2.png);
+}
+
+.banner-list__item--icon3 {
+    background-image: url(img/banner-icon3.png);
+}
+
+.banner-list__item--icon4 {
+    background-image: url(img/banner-icon4.png);
+}
+
+.banner-list__item--icon5 {
+    background-image: url(img/banner-icon9.png);
+}
+
+.banner-list__item--icon6 {
+    background-image: url(img/banner-icon8.png);
+}
+
+.banner-list__item--icon7 {
+    background-image: url(img/banner-icon7.png);
+}
+
+.banner-list__item--icon8 {
+    background-image: url(img/banner-icon6.png);
+
+}
+
+.banner-list__item--icon9 {
+    background-image: url(img/banner-icon5.png);
+}
