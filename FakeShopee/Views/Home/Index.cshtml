@@ -2,9 +2,10 @@
     ViewData["Title"] = "Home Page";
     Layout = "_MainLayout";
 }
+@model List<Product>
 
 <div class="container">
-    
+
     <partial name="HomeBanner"/>
 
     <div class="grid__row grid">
@@ -45,7 +46,7 @@
                     <div class="product-header__item">
                         <p class="product-header__item--price-text">Giá</p>
                         <i class="fa-solid fa-angle-down"></i>
-                        <div class="product-header-sort_price"> 
+                        <div class="product-header-sort_price">
                             <a class="product-header-sort_price__item">Giá: Thấp đến Cao</a>
                             <br>
                             <a class="product-header-sort_price__item">Giá: Cao đến Thấp</a>
@@ -70,18 +71,15 @@
                 </div>
 
             </div>
-            
+
             <div class="product-list ">
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
-                <partial name="HomeProductItem"/>
+                @if (Model != null && Model.Count > 0)
+                {
+                    @foreach (Product product in Model)
+                    {
+                        <partial name="HomeProductItem" model="product"/>
+                    }
+                }
             </div>
 
             <div class="product-page_number">
