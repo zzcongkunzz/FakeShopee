@@ -115,3 +115,19 @@
 .banner-list__item--icon9 {
     background-image: url(img/banner-icon5.png);
 }
+
+@media(max-width: 1024px) {
+    .banner__phu {
+        display: none;
+    }
+
+    .banner__chinh {
+        margin: 0 20px;
+        height: 220px;
+    }
+
+    .banner-combox {
+        display: block;
+    }
+    
+}
