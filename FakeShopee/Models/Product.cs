@@ -35,6 +35,6 @@ public class Product
     // Số lượng đã bán
     public int SoldQuantity { get; set; }
 
-        [Column(TypeName = "datetime2")]
+    [Column(TypeName = "datetime2")]
     public DateTime ProductImportDate { get; set; }
 }

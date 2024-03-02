@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    FindProductByCriteriaRequest findProductByCriteriaRequest = ViewBag.findProductByCriteria;
     Layout = "_MainLayout";
 }
-@model List<Product>
+@model HomeData
 
 <div class="container">
 
@@ -18,21 +19,20 @@
             </h3>
 
             <ul class="category-list">
-                <li class="category-item category-item-follow">
-                    <a href="#" class="category-item-link">Thời Trang Nam</a>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-item-link">Điện Thoại & Phụ Kiện</a>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-item-link">Thiết Bị Điện Tử</a>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-item-link">Máy Tính & Laptop</a>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-item-link">Sức Khỏe</a>
-                </li>
+                @if (Model.ListCategory != null && Model.ListCategory.Count > 0)
+                {
+                    @foreach (Category category in Model.ListCategory)
+                    {
+                        <li 
+                            class="category-item @(findProductByCriteriaRequest?.Category == category.Name ? "category-item-follow" : "") ">
+                            <a href="@Url.Action("FindProductByCriteria", "Home", new {
+                                         NameProductOrCategory = findProductByCriteriaRequest?.NameProductOrCategory,
+                                         Category = category.Name,
+                                     })"
+                               class="category-item-link">@category.Name</a>
+                        </li>
+                    }
+                }
             </ul>
         </div>
 
@@ -73,9 +73,9 @@
             </div>
 
             <div class="product-list ">
-                @if (Model != null && Model.Count > 0)
+                @if (Model.ListProduct != null && Model.ListProduct.Count > 0)
                 {
-                    @foreach (Product product in Model)
+                    @foreach (Product product in Model.ListProduct)
                     {
                         <partial name="HomeProductItem" model="product"/>
                     }
@@ -102,3 +102,5 @@
     </div>
 
 </div>
+
+<script src="~/js/HomeIndex.js"></script>

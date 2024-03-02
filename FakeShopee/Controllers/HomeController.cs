@@ -1,29 +1,91 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FakeShopee.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace FakeShopee.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
+    private readonly IMemoryCache memoryCache;
+    private readonly int pageSize;
+    private HomeData homeData;
+    private FindProductByCriteriaRequest FindProductByCriteriaRequest;
     private MyDbContext MyDbContext{ get;}
     
-    public HomeController(MyDbContext context ,ILogger<HomeController> logger)
+    public HomeController(MyDbContext context ,ILogger<HomeController> logger,  IMemoryCache memoryCache, IConfiguration configuration)
     {
         _logger = logger;
         MyDbContext = context;
-
+        this.memoryCache = memoryCache;
+        pageSize = configuration.GetValue<int>("PageSize");
+        homeData = new HomeData();
+        homeData.ListCategory = MyDbContext.Categories.ToList();
         // AddData();
     }
 
     public IActionResult Index()
     {
-        List<Product> products = MyDbContext.Products.ToList();
-        return View(products);
+        homeData.ListProduct = MyDbContext.Products.Take(pageSize).ToList();
+        return View(homeData);
     }
 
+    public async Task<List<Product>> GetAllProduct()
+    {
+        var cacheData = memoryCache.Get<IEnumerable<Product>>("ListProduct");
+        
+        if (cacheData == null)
+        {
+            var expirationTime = DateTimeOffset.Now.AddMinutes(1);
+            homeData.ListProduct = await MyDbContext.Products.ToListAsync();
+            memoryCache.Set("ListProduct", homeData.ListProduct, expirationTime);
+        }
+        else
+        {
+            homeData.ListProduct = cacheData.ToList();
+        }
+
+        return homeData.ListProduct;
+    }
+    
+    [HttpGet]
+    [Route("Default/FindProductByCriteria")]
+    public IActionResult FindProductByCriteria(FindProductByCriteriaRequest findProductByCriteriaRequest)
+    {
+        ViewBag.findProductByCriteria = findProductByCriteriaRequest;
+        IQueryable<Product> products = MyDbContext.Products
+            .Include(product => product.Category)
+            .AsQueryable();
+        if (!string.IsNullOrEmpty(findProductByCriteriaRequest.NameProductOrCategory))
+        {
+            string name = findProductByCriteriaRequest.NameProductOrCategory.ToLower();
+            products = products.Where(product => (product.Name.ToLower().Contains(name) ||
+                                                  product.Category.Name.ToLower().Contains(name)
+                                                  ));
+
+            products.ToList();
+        }
+
+        if (!string.IsNullOrEmpty(findProductByCriteriaRequest.Category))
+        {
+            string category = findProductByCriteriaRequest.Category;
+            products = products.Where(product => product.Category.Name.ToLower().Equals(category));
+        }
+
+        if (findProductByCriteriaRequest.PageNumber != null)
+        {
+            int pageTo = findProductByCriteriaRequest.PageNumber * pageSize;
+            products = products.Skip(pageTo).Take(pageSize);
+        }
+        
+        homeData.ListProduct = products.ToList();
+        
+        return View("Index", homeData);
+    }
+    
     public IActionResult Privacy()
     {
         return View();
@@ -37,20 +99,27 @@ public class HomeController : Controller
 
     public void AddData()
     {
+        List<Category> Categorys = AddCategory();
+       
+       AddProduct(Categorys);
+    }
+
+    public List<Category> AddCategory()
+    {
         List<Category> Categorys = new List<Category>
         {
             new Category { Name = "Thời trang" },
+            new Category { Name = "Điện thoại và Phụ Kiện" },
             new Category { Name = "Thiết bị điện tử" },
             new Category { Name = "Máy Tính và Laptop" },
-            new Category { Name = "Điện thoại và Phụ Kiện" },
             new Category { Name = "Sức khỏe" }
         };
         
-       MyDbContext.Categories.AddRange(Categorys);
+        MyDbContext.Categories.AddRange(Categorys);
 
-       MyDbContext.SaveChanges();
-       
-       AddProduct(Categorys);
+        MyDbContext.SaveChanges();
+
+        return Categorys;
     }
 
     public void AddProduct(List<Category> Categorys)
@@ -276,7 +345,7 @@ public class HomeController : Controller
                 InventoryQuantity = 1000,
                 SoldQuantity = 550,
                 ProductImportDate = DateTime.ParseExact("23/03/2023", "dd/MM/yyyy", null),
-                Category = Categorys[3] // Thay thế bằng danh mục thực tế
+                Category = Categorys[4] // Thay thế bằng danh mục thực tế
             },
             new Product
             {
@@ -331,7 +400,6 @@ public class HomeController : Controller
                 Category = Categorys[4] // Thay thế bằng danh mục thực tế
             },
         };
-        
         
         MyDbContext.Products.AddRange(products);
 

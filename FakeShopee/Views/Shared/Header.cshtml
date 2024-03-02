@@ -9,10 +9,10 @@
                 </a>
             </div>
             <div class="header-mix__search">
-                <form style="display: flex; flex: 1" class="form-search" >
+                <form method="get" asp-controller="Home" asp-action="FindProductByCriteria" style="display: flex; flex: 1" class="form-search" >
                     <div class="input--search-Wrap">
                         <input placeholder="Tìm sản phẩm, thương hiệu, và tên shop" autocomplete="off"
-                               type="text" name="search" id="search" class="input--search">
+                               type="text" name="NameProductOrCategory" id="search" class="input--search">
                         <div class="header--search-history">
                             <h3>Lịch sử Tìm Kiếm</h3>
                             <ul>
@@ -22,7 +22,7 @@
                             </ul>
                         </div>
                     </div>
-                    <button class="button--search" type="button">
+                    <button class="button--search" type="submit">
                         <i class="fas fa-search icon--search"></i>
                     </button>
                 </form>

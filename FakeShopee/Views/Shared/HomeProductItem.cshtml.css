@@ -71,11 +71,12 @@
 }
 
 .product-item__price {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-left: -2px;
 }
 
 .product-item__Quantity-purchased {
+    font-size: 1.4rem;
     font-weight: 350;
     color: #666;
 }
