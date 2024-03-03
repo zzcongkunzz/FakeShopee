@@ -144,7 +144,7 @@
 }
 
 .transport__icon{
-    background-image: url(/assets/img/FreeShip.png);
+    background-image: url(img/FreeShip.png);
     width: 25px;
     height: 15px;
     background-size: cover;

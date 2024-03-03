@@ -4,8 +4,10 @@
         <partial name="HeaderNav"/>
         <div class="header-mix">
             <div class="header-mix__logo">
-                <a href="@Url.Action("Index", "Home")">
-                    <img src="img/logo.png" alt="lỗi logo" id="logo">
+                <a class="header-mix__linkLogo" href="@Url.Action("Index", "Home")">
+                    @* <img style="object-fit: cover; padding: 0 10px; padding-top: -10px; width: 202px" src="~/img/logo.png" alt="lỗi logo" id="logo"> *@
+                    <div id="logo"></div>
+                    <div class="clear"></div>
                 </a>
             </div>
             <div class="header-mix__search">

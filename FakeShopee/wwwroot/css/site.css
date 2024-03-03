@@ -10,6 +10,11 @@
   padding: 0;
   box-sizing: inherit;
 }
+
+.clear{
+  clear: both;
+}
+
 /* rem: đơn vị tham chiếu tỷ lệ so với phần tử gốc của website  */
 html{
   font-size: 10px; /*10px*/
