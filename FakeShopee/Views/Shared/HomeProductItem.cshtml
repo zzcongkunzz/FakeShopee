@@ -8,7 +8,7 @@
         <div class="produc-item-sell">
             <div class="product-item-combox-price">
                 <span class="product-item__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
-                <span class="product-item__price">@Model.Price</span>
+                <span class="product-item__price">@((double)Model.Price - ((double)Model.Price * (double)Model.Discount / 100))</span>
             </div>
             <span class="product-item__Quantity-purchased">Đã bán <span>@Model.SoldQuantity</span></span>
         </div>

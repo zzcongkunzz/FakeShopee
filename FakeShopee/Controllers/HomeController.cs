@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using FakeShopee.constant;
 using Microsoft.AspNetCore.Mvc;
 using FakeShopee.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewBag.findProductByCriteria = new FindProductByCriteriaRequest();
         homeData.ListProduct = MyDbContext.Products.Take(pageSize).ToList();
         return View(homeData);
     }
@@ -57,13 +59,14 @@ public class HomeController : Controller
     {
         ViewBag.findProductByCriteria = findProductByCriteriaRequest;
         IQueryable<Product> products = MyDbContext.Products
-            .Include(product => product.Category)
+            .Include(p => p.Category)
             .AsQueryable();
+        
         if (!string.IsNullOrEmpty(findProductByCriteriaRequest.NameProductOrCategory))
         {
             string name = findProductByCriteriaRequest.NameProductOrCategory.ToLower();
-            products = products.Where(product => (product.Name.ToLower().Contains(name) ||
-                                                  product.Category.Name.ToLower().Contains(name)
+            products = products.Where(p => (p.Name.ToLower().Contains(name) ||
+                                                  p.Category.Name.ToLower().Contains(name)
                                                   ));
 
             products.ToList();
@@ -72,12 +75,43 @@ public class HomeController : Controller
         if (!string.IsNullOrEmpty(findProductByCriteriaRequest.Category))
         {
             string category = findProductByCriteriaRequest.Category;
-            products = products.Where(product => product.Category.Name.ToLower().Equals(category));
+            products = products.Where(p => p.Category.Name.ToLower().Equals(category));
         }
-
+        
+        if (findProductByCriteriaRequest.SortBy != null)
+        {
+            switch (findProductByCriteriaRequest.SortBy)
+            {
+                case SortType.NEW:
+                {
+                    products = products.OrderBy(p => p.ProductImportDate);
+                    break;
+                }
+                case SortType.HOT_SELLING:
+                {
+                    products = products.OrderByDescending(p => p.SoldQuantity);
+                    break;
+                }
+                case SortType.PRICE_ASC:
+                {
+                    products = products.OrderBy(p => ((double)p.Price - ((double)p.Price * (double)p.Discount / 100)));
+                    break;
+                }
+                case SortType.PRICE_DESC:
+                {
+                    products = products.OrderByDescending(p => ((double)p.Price - ((double)p.Price * (double)p.Discount / 100)));
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+        }
+        
         if (findProductByCriteriaRequest.PageNumber != null)
         {
-            int pageTo = findProductByCriteriaRequest.PageNumber * pageSize;
+            int pageTo = (findProductByCriteriaRequest.PageNumber - 1) * pageSize;
             products = products.Skip(pageTo).Take(pageSize);
         }
         

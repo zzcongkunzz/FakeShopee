@@ -1,31 +1,31 @@
-﻿function CreateOnClick_productHeader__productHeadeItem(){
-
-    var productHeadeItem = document.querySelectorAll(".product-header-left > .product-header__item");
-    for(var i = 0; i < productHeadeItem.length - 1; i++){
-        productHeadeItem[i].addEventListener("click", function(e){
-            for(var x of productHeadeItem){
-                x.classList.remove("product-header__item-follow");
-            }
-            e.target.classList.add("product-header__item-follow");
-            document.querySelector(".product-header__item--price-text").innerHTML = "Giá";
-
-        });
-    }
-
-    var productHeaderSortPrice = document.getElementsByClassName("product-header-sort_price__item");
-    for(var i of productHeaderSortPrice){
-        i.addEventListener("click", function(e){
-            document.querySelector(".product-header__item--price-text").innerHTML = e.target.innerHTML;
-            var productHeadeItem_lastChild = document.querySelector(".product-header__item:last-child");
-            var productHeadeItem = document.querySelectorAll(".product-header-left > .product-header__item");
-            for(var i of productHeadeItem){
-                i.classList.remove("product-header__item-follow");
-            }
-            productHeadeItem_lastChild.classList.add("product-header__item-follow");
-        });
-    }
-    
-}
+﻿// function CreateOnClick_productHeader__productHeadeItem(){
+//
+//     var productHeadeItem = document.querySelectorAll(".product-header-left > .product-header__item");
+//     for(var i = 0; i < productHeadeItem.length - 1; i++){
+//         productHeadeItem[i].addEventListener("click", function(e){
+//             for(var x of productHeadeItem){
+//                 x.classList.remove("product-header__item-follow");
+//             }
+//             e.target.classList.add("product-header__item-follow");
+//             document.querySelector(".product-header__item--price-text").innerHTML = "Giá";
+//
+//         });
+//     }
+//
+//     var productHeaderSortPrice = document.getElementsByClassName("product-header-sort_price__item");
+//     for(var i of productHeaderSortPrice){
+//         i.addEventListener("click", function(e){
+//             document.querySelector(".product-header__item--price-text").innerHTML = e.target.innerHTML;
+//             var productHeadeItem_lastChild = document.querySelector(".product-header__item:last-child");
+//             var productHeadeItem = document.querySelectorAll(".product-header-left > .product-header__item");
+//             for(var i of productHeadeItem){
+//                 i.classList.remove("product-header__item-follow");
+//             }
+//             productHeadeItem_lastChild.classList.add("product-header__item-follow");
+//         });
+//     }
+//    
+// }
 
 // function CreateOnClick_CategoryItem(){
 //     var categoryItem = document.getElementsByClassName("category-item");
@@ -81,7 +81,7 @@ function MoneyFomat(){
 
 
 //khởi chạy
-CreateOnClick_productHeader__productHeadeItem();
+// CreateOnClick_productHeader__productHeadeItem();
 // CreateOnClick_CategoryItem();
 CheckNameProduct();
 MoneyFomat();

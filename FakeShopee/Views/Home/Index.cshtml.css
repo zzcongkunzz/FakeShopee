@@ -182,6 +182,8 @@
 }
 
 .product-header__item {
+    text-decoration: none;
+    color: var(--text-color);
     line-height: 34px;
     margin: 0px 0px 0px 10px;
     padding: 0px 15px;
@@ -228,6 +230,7 @@
 }
 
 .product-header-sort_price__item {
+    text-decoration: none;
     color: var(--text-color);
 }
 

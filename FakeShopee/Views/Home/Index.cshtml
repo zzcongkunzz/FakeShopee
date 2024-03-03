@@ -3,6 +3,7 @@
     FindProductByCriteriaRequest findProductByCriteriaRequest = ViewBag.findProductByCriteria;
     Layout = "_MainLayout";
 }
+@using FakeShopee.constant
 @model HomeData
 
 <div class="container">
@@ -25,7 +26,7 @@
                     {
                         <li 
                             class="category-item @(findProductByCriteriaRequest?.Category == category.Name ? "category-item-follow" : "") ">
-                            <a href="@Url.Action("FindProductByCriteria", "Home", new {
+                            <a href="@Url.Action("FindProductByCriteria", "Home", new FindProductByCriteriaRequest(){
                                          NameProductOrCategory = findProductByCriteriaRequest?.NameProductOrCategory,
                                          Category = category.Name,
                                      })"
@@ -40,17 +41,67 @@
             <div class="product-header">
                 <div class="product-header-left">
                     <p class="product-title">Sắp xếp theo</p>
-                    <a class="product-header__item product-header__item-follow">Phổ Biến</a>
-                    <a class="product-header__item">Mới Nhất</a>
-                    <a class="product-header__item">Bán Chạy</a>
-                    <div class="product-header__item">
-                        <p class="product-header__item--price-text">Giá</p>
+                    <a class="product-header__item @(findProductByCriteriaRequest?.SortBy == SortType.POPULAR ? "product-header__item-follow" : "")"
+                       href="@Url.Action("FindProductByCriteria",
+                                 "Home", 
+                                 new FindProductByCriteriaRequest(){
+                                     NameProductOrCategory = findProductByCriteriaRequest?.NameProductOrCategory,
+                                     Category = findProductByCriteriaRequest?.Category,
+                                     SortBy = SortType.POPULAR
+                                 })"
+                    >@(SortType.POPULAR.GetDescription())</a>
+                    
+                    <a class="product-header__item @(findProductByCriteriaRequest?.SortBy == SortType.NEW ? "product-header__item-follow" : "")"
+                       href="@Url.Action("FindProductByCriteria",
+                                 "Home", 
+                                 new FindProductByCriteriaRequest(){
+                                    NameProductOrCategory = findProductByCriteriaRequest?.NameProductOrCategory,
+                                    Category = findProductByCriteriaRequest?.Category,
+                                    SortBy = SortType.NEW
+                                })"
+                    >@(SortType.NEW.GetDescription())</a>
+                    
+                    <a class="product-header__item @(findProductByCriteriaRequest?.SortBy == SortType.HOT_SELLING ? "product-header__item-follow" : "")"
+                       href="@Url.Action("FindProductByCriteria",
+                                 "Home", 
+                                 new FindProductByCriteriaRequest(){
+                                     NameProductOrCategory = findProductByCriteriaRequest?.NameProductOrCategory,
+                                     Category = findProductByCriteriaRequest?.Category,
+                                     SortBy = SortType.HOT_SELLING
+                                 })"
+                    >@(SortType.HOT_SELLING.GetDescription())</a>
+                    
+                    <div class="product-header__item @((findProductByCriteriaRequest?.SortBy == SortType.PRICE_ASC ||
+                                                        findProductByCriteriaRequest?.SortBy == SortType.PRICE_DESC)
+                                                         ? "product-header__item-follow" : "")"
+                         >
+                        <p class="product-header__item--price-text"
+                           >@((findProductByCriteriaRequest?.SortBy == SortType.PRICE_ASC ||
+                                findProductByCriteriaRequest?.SortBy == SortType.PRICE_DESC)
+                                 ? findProductByCriteriaRequest?.SortBy.GetDescription() : "Giá")</p>
                         <i class="fa-solid fa-angle-down"></i>
                         <div class="product-header-sort_price">
-                            <a class="product-header-sort_price__item">Giá: Thấp đến Cao</a>
+                            <a class="product-header-sort_price__item"
+                               href="@Url.Action("FindProductByCriteria",
+                                         "Home", 
+                                         new FindProductByCriteriaRequest(){
+                                             NameProductOrCategory = findProductByCriteriaRequest?.NameProductOrCategory,
+                                             Category = findProductByCriteriaRequest?.Category,
+                                             SortBy = SortType.PRICE_ASC
+                                         })"
+                            >@(SortType.PRICE_ASC.GetDescription())</a>
+                            
                             <br>
-                            <a class="product-header-sort_price__item">Giá: Cao đến Thấp</a>
-
+                            <a class="product-header-sort_price__item" 
+                               href="@Url.Action("FindProductByCriteria",
+                                         "Home", 
+                                         new FindProductByCriteriaRequest(){
+                                             NameProductOrCategory = findProductByCriteriaRequest?.NameProductOrCategory,
+                                             Category = findProductByCriteriaRequest?.Category,
+                                             SortBy = SortType.PRICE_DESC
+                                         })"
+                            >@(SortType.PRICE_DESC.GetDescription())</a>
+                            
                         </div>
                     </div>
                 </div>
