@@ -95,7 +95,7 @@
         const text = await response.text();
         if(response.status===200){
             setCookie("token", text, 3);
-            window.location.replace("/");
+            window.location.replace("/Home");
         }else{
             errorForm.style.display = "flex";
             errorText.innerHTML = text;
