@@ -107,7 +107,6 @@ public class LoginAndSignupController : Controller
         
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
-        Console.WriteLine("{0} {1} {2} {3}", user.FullName, user.UserGroup, user.Email, user.Password);
         return RedirectToAction("Login");
     }
 
