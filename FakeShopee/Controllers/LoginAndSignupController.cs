@@ -2,11 +2,11 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FakeShopee.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using System.Text.Json.Serialization;
 
 namespace FakeShopee.Controllers;
 
@@ -22,15 +22,44 @@ public class LoginAndSignupController : Controller
         _configuration = configuration;
     }
 
+    public static Users getUserByToken (String jwt, List<Users> users){
+        var handler = new JwtSecurityTokenHandler();
+        try{
+            var token = handler.ReadJwtToken(jwt);
+            var claims = token.Claims.ToArray();
+            var userId = claims.FirstOrDefault(claim=>claim.Type == "nameid").Value;
+            Users user = null;
+            user = users.FirstOrDefault(user1=>user1.Id.ToString() == userId);
+            if(user == null) throw new Exception();
+            return user;
+        }catch{
+            throw new Exception();
+        }
+    }
+
     [HttpGet]
-    public IActionResult Login()
+    public async Task<IActionResult> Login()
     {
+        var jwt = Request.Cookies["token"];
+        var users = await _context.Users.ToListAsync();
+        if (jwt != null)
+        {
+            try{
+                Users user = null;
+                user = getUserByToken(jwt, users);
+                if(user!=null) return RedirectToAction("Index", "Home");
+            }catch{
+                return View();
+            }
+        }
         return View();
+        
     }
 
     [HttpPost]
     public async Task<IActionResult> Login (String username, String password){
-        Console.WriteLine("uuuu{0} {1}", username, password);
+        
+        Console.WriteLine("uuuu{0} {1}", username, Request.Cookies["token"]);
         var users = await _context.Users.ToListAsync();
         Users user = null;
         users.ForEach(user1=>{
@@ -72,7 +101,19 @@ public class LoginAndSignupController : Controller
     }
 
     [HttpGet]
-    public IActionResult Register(){
+    public async Task<IActionResult> Register(){
+        var jwt = Request.Cookies["token"];
+        var users = await _context.Users.ToListAsync();
+        if (jwt != null)
+        { 
+            try{
+                Users user = null;
+                user = getUserByToken(jwt, users);
+                if(user!=null) return RedirectToAction("Index", "Home");
+            }catch{
+                return View();
+            }
+        }
         return View();
     }
 
@@ -108,6 +149,58 @@ public class LoginAndSignupController : Controller
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
         return RedirectToAction("Login");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> User () {
+        var jwt = Request.Cookies["token"];
+        var users = await _context.Users.ToListAsync();
+        if (jwt != null)
+        { 
+            try{
+                Users user = null;
+                user = getUserByToken(jwt, users);
+                if(user!=null) return View(user);
+            }catch{
+                return RedirectToAction("Login");
+            }
+        }
+        return RedirectToAction("Login");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> User (Users user){
+        var users = await _context.Users.ToListAsync();
+        var jwt = Request.Cookies["token"];
+        Users user1 = null;
+        if (jwt != null)
+        { 
+            try{
+                user1 = getUserByToken(jwt, users);
+            }catch{
+                return RedirectToAction("Login");
+            }
+        }
+        ViewBag.Type = 0;
+        if (ModelState["FullName"].Errors.Count > 0 || ModelState["Email"].Errors.Count > 0 || ModelState["PhoneNumber"].Errors.Count > 0 ){
+            return View(user);
+        }
+        if (user1.PhoneNumber!=user.PhoneNumber && users.Any(i => i.PhoneNumber == user.PhoneNumber)){
+            ModelState.AddModelError("PhoneNumber", "Số điện thoại đã được sử dụng");
+            return View(user);
+        }
+        if (user1.Email!=user.Email && users.Any(i => i.Email == user.Email)){
+            ModelState.AddModelError("Email", "Email đã được sử dụng");
+            return View(user);
+        }
+        user1.FullName = user.FullName;
+        user1.Email = user.Email;
+        user1.PhoneNumber = user.PhoneNumber;
+        user1.Gender = user.Gender;
+        user1.Address = user.Address;
+        await _context.SaveChangesAsync();
+        ViewBag.Type = 1;
+        return View(user1);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

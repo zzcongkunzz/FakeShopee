@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "Thông Tin Tài Khoản";
+    Layout = "_MainLayout";
+}
+@model Users
+
+<head>
+    <link rel="stylesheet" href="~/css/LoginAndSignup.css">
+</head>
+
+<div class="user-page">
+    <div class="user-page__navbar">
+
+    </div>
+    <div class="user-page__action">
+        <div class="user-page__title">
+            <h2>Hồ Sơ Của Tôi</h2>
+            <p style="font-size: 16px;">Quản lý thông tin hồ sơ</p>
+        </div>
+        <hr />
+        <form action="/LoginAndSignup/User" method="post">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><p>Số điện thoại</p></td>
+                        <td>
+                            <input type="text" id="las-phone"
+                            placeholder="Số điện thoại" autocomplete="on" 
+                            name="phoneNumber" asp-for="PhoneNumber">
+                            <br />
+                            <span class="las-form-input-error" asp-validation-for="PhoneNumber"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p>Email</p></td>
+                        <td>
+                            <input type="text" id="las-email"
+                            placeholder="Email" autocomplete="on" 
+                            name="email" asp-for="Email">
+                            <br />
+                            <span class="las-form-input-error" asp-validation-for="Email"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p>Họ Và Tên</p></td>
+                        <td>
+                            <input type="text" id="las-fullname"
+                            placeholder="Họ Và Tên" autocomplete="on" 
+                            name="fullname" asp-for="FullName">
+                            <br />
+                            <span class="las-form-input-error" asp-validation-for="FullName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p>Giới Tính</p></td>
+                        <td>
+                            <input type="radio" id="__gender--men" name="gender" value="Nam" asp-for="Gender">
+                            <label for="__gender--men">Nam</label>
+                            <input type="radio" id="gender--female" name="gender" value="Nu" asp-for="Gender">
+                            <label for="__gender--female">Nữ</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p>Địa Chỉ</p></td>
+                        <td>
+                            <textarea name="address" cols="50" rows="5" asp-for="Address"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="las-form-btn">Lưu</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

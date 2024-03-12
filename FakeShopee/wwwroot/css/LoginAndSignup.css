@@ -225,3 +225,52 @@ p{
     font-size: .875rem;
     color: #222;
 }
+
+.user-page{
+    margin-top: 140px;
+    display: flex;
+    gap: 20px;
+}
+
+.user-page form p{
+    font-size: 16px!important;
+    font-family: sans-serif;
+    color: rgba(85,85,85,.8);
+}
+
+.user-page form input, .user-page form textarea, .user-page form label{
+    font-size: 16px!important;
+    font-family: sans-serif;
+    padding: 10px;
+}
+
+.user-page__navbar{
+    width: 240px;
+    height: 40px;
+}
+
+.user-page__action{
+    background-color: white;
+    flex-grow: 2;
+    padding: 20px 40px;
+}
+
+.user-page form tr{
+    padding: 20px 0;
+}
+
+.user-page form tr td:first-child{
+    width: 200px;
+    padding-bottom: 20px;
+    text-align: right;
+}
+
+.user-page form tr td:last-child{
+    padding-left: 40px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+.user-page .las-form-btn{
+    width: fit-content;
+}

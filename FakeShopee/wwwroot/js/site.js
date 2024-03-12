@@ -29,8 +29,6 @@ function HeaderCartProduct() {
     else HeaderCartProduct.classList.add("header-mix__cart-list");
 }
 
-
-
 MoneyFomatCartItem();
 CheckNameProductCartItem();
 HeaderCartProduct();

@@ -1,0 +1,321 @@
+<style>
+    .header-nav {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header-nav__ListItem {
+        display: flex;
+        font-size: 1.3rem;
+        list-style: none;
+        padding-left: 0;
+        margin-top: 10px;
+    }
+
+    .header-nav__item {
+        margin-left: 9px;
+        margin-right: 8px;
+        font-weight: 300;
+        position: relative;
+    }
+
+    .header-nav__item:hover {
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    .header-nav__item--PhanCach::after {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 13px;
+        background-color: #F9725C;
+        position: absolute;
+        top: 0;
+        right: -9px;
+    }
+
+
+    .header-nav__item,
+    .header-nav__ListItem a {
+        text-decoration: none;
+        color: var(--while-color);
+    }
+
+    .header-nav__item--NoPointer:hover {
+        cursor: text;
+        opacity: 1;
+    }
+
+    .header-nav__item--User {
+        display: flex;
+        justify-items: center;
+        margin-top: -3px;
+        position: relative;
+    }
+
+    .userAvata {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .userName {
+        margin-left: 5px;
+        margin-top: 2px;
+    }
+
+    .header-nav__item--User-menu::after {
+        content: '';
+        position: absolute;
+        right: 54%;
+        top: -11%;
+        border-width: 8px 10px;
+        border-style: solid;
+        z-index: 2;
+        border-color: transparent transparent var(--while-color) transparent;
+    }
+
+    .header-nav__item--User-menu {
+        display: none;
+        position: absolute;
+        top: 111%;
+        left: 0;
+        list-style: none;
+        background-color: var(--while-color);
+        border-radius: 2px;
+        width: 150px;
+        z-index: 1;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        padding-bottom: 0;
+    }
+
+    .header-nav__item--User-menu .User-menu-item {
+        color: var(--text-color);
+        width: 100%;
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 16.8px;
+        display: block;
+        margin-right: 0;
+        padding: 15px;
+    }
+
+    .header-nav__item--User:hover {
+        opacity: 1;
+
+    }
+
+    .header-nav__item--User:hover .userName {
+        opacity: 0.5;
+    }
+
+    .header-nav__item--User:hover .header-nav__item--User-menu {
+        display: block;
+    }
+
+    .User-menu-item:hover {
+        background-color: rgba(24, 24, 24, 0.1);
+        color: #00bfa5;
+        
+    }
+
+    #userItem{
+        position: relative;
+        display: inline-block;
+        opacity: 1!important;
+    }
+
+    .user-dropdown-btn{
+        background-color: inherit;
+        border: none;
+        display: flex;
+        gap: 5px;
+        padding: 0;
+    }
+
+    .user-dropdown-menu{
+        padding: 0;
+        @* display: none; *@
+        visibility: hidden;
+        position: absolute;
+        background-color: white;
+        top: 20px;
+        opacity: 0;
+        transition: all .5s ease;
+        color: black;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .user-dropdown-menu li{
+        list-style-type: none;
+        padding: 10px!important;
+    }
+
+    a.user-dropdown-item{
+        color: black;
+        font-size: 12px;
+    }
+
+    a.user-dropdown-item:hover{
+        opacity: 0.5;
+    }
+
+    #userItem:hover .user-dropdown-menu {
+        background-color: white;
+        color: black;
+        @* display: block; *@
+        visibility: visible;
+        @* height: 200px; *@
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #userItem p{
+        margin: 0;
+        padding: 0;
+        color: white;
+        line-height: 15px;
+    }
+
+    .user-avatar{
+        width: 15px;
+        height: 15px;       
+        display: inline-block;
+        position: relative;
+        border-radius: 50%;
+        border: 0.0625rem solid rgba(0, 0, 0, .09);
+        box-sizing: border-box;
+    }
+
+    .user-avatar__placeholder{
+        width: 100%;
+        position: relative;
+        padding-top: 100%;
+        background-color: #f5f5f5;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .user-svg-icon{
+        stroke: #c6c6c6;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 2rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>
+
+@model Users
+@{
+    var user = (Users)ViewData["User"];
+    var IsLoggedIn = (bool)ViewData["IsLoggedIn"];
+}
+
+<nav class="header-nav ">
+    <ul class="header-nav__ListItem">
+        <li class="header-nav__item  header-nav__item--PhanCach">
+            <a href="https://banhang.shopee.vn/account/signin?next=%2F" target="_blank">
+                Kênh Người
+                Bán
+            </a>
+        </li>
+        <li class="header-nav__item header-nav__item--PhanCach">
+            <a href="https://shopee.vn/m/sell-on-shopee" target="_blank">Trở Thành Người bán Shopee</a>
+        </li>
+        <li class="header-nav__item  header-nav__item--PhanCach">Tải Ứng Dụng</li>
+        <li class="header-nav__item header-nav__item--NoPointer">
+            Kết Nối
+            <a href="https://www.facebook.com/ShopeeVN" target="_blank">
+                <i class="fa-brands fa-facebook Pointer Hover">
+                </i>
+            </a>
+            <a href="https://www.instagram.com/shopee_vn/" target="_blank">
+                <i class="fa-brands fa-instagram margin-left-4 Pointer Hover">
+                </i>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="header-nav__ListItem">
+        <li class="header-nav__item  header-nav__item--PhanCach">
+            <i class="fa-solid fa-bell"></i>
+            Thông báo
+        </li>
+        <li class="header-nav__item  header-nav__item--PhanCach">
+            <a href="https://help.shopee.vn/vn/s/" target="_blank">
+                <i class="fa-solid fa-circle-question"></i>
+                Hỗ Trợ
+            </a>
+        </li>
+        @if (!IsLoggedIn)
+        {
+            <li id="dangki" class="header-nav__item  header-nav__item--PhanCach dangxuat">
+                <a href="./LoginAndSignup/Register">Đăng Ký</a>
+            </li>
+            <li id="dangnhap" class="header-nav__item dangxuat">
+                <a href="./LoginAndSignup/Login">Đăng Nhập</a>
+            </li>
+        }
+        else
+        {
+            <li id="userItem" class="header-nav__item">
+                <button class="user-dropdown-btn">
+                    <div class="user-avatar">
+                    <div class="user-avatar__placeholder"><svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0"
+                            y="0" class="user-svg-icon">
+                            <g>
+                                <circle cx="7.5" cy="4.5" fill="none" r="3.8" stroke-miterlimit="10"></circle>
+                                <path d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke-linecap="round"
+                                    stroke-miterlimit="10"></path>
+                            </g>
+                        </svg></div>
+                    </div>
+                    <p>@user.FullName</p>
+                </button>
+                <ul class="user-dropdown-menu">
+                    <li><a class="user-dropdown-item" href="/LoginAndSignup/User">Tài Khoản Của Tôi</a></li>
+                    <li><a class="user-dropdown-item" href="#" id="logout">Đăng Xuất</a></li>
+                </ul>
+            </li>
+        }
+        @* <li id="User" class="header-nav__item header-nav__item--User"> *@
+        @* <img src="img/avata.jpg" alt="lỗi avata" class="userAvata"> *@
+        @* <span class="userName">zzcongkunzz</span> *@
+        @* <ul class="header-nav__item--User-menu"> *@
+        @* <li> *@
+        @* <a href="#" class="User-menu-item">Tài Khoản Của Tôi</a> *@
+        @* </li> *@
+        @* <li> *@
+        @* <a href="#" class="User-menu-item">Đơn Mua</a> *@
+        @* </li> *@
+        @* <li> *@
+        @* <a href="#" class="User-menu-item" onclick="DangXuat()">Đăng Xuất</a> *@
+        @* </li> *@
+        @* </ul> *@
+        @* </li> *@
+
+    </ul>
+</nav>
+
+<script>
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    const logout = document.getElementById("logout");
+    logout.addEventListener("click", ()=>{
+        setCookie("token", null, -1);
+        window.location.replace("/Home");
+    })
+</script>
