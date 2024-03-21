@@ -134,19 +134,59 @@
             </div>
 
             <div class="product-page_number">
-                <a href="#" class="product-page_number__item">
-                    <i class="fa-solid fa-angle-left"></i>
-                </a>
-                <a href="#" class="product-page_number__item product-page_number__item--follow">1</a>
-                <a href="#" class="product-page_number__item">2</a>
-                <a href="#" class="product-page_number__item">3</a>
-                <a href="#" class="product-page_number__item">4</a>
-                <a href="#" class="product-page_number__item">5</a>
-                <a href="#" class="product-page_number__item">...</a>
-                <a href="#" class="product-page_number__item">14</a>
-                <a href="#" class="product-page_number__item">
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
+                @if (findProductByCriteriaRequest.PageNumber > 1)
+                {
+                    FindProductByCriteriaRequest tmp = (FindProductByCriteriaRequest)findProductByCriteriaRequest.Clone();
+                    tmp.PageNumber -= 1;
+                    <a class="product-page_number__item" 
+                    href="@Url.Action("FindProductByCriteria", "Home", tmp)"
+                       >
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+                }
+                else
+                {
+                    <a class="product-page_number__item" >
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+                }
+                
+                @if (findProductByCriteriaRequest.PageTotal != null)
+                {
+                    FindProductByCriteriaRequest tmp = (FindProductByCriteriaRequest)findProductByCriteriaRequest.Clone();
+                    for (int i = 1; i <= findProductByCriteriaRequest.PageTotal; i++)
+                    {
+                        tmp.PageNumber = i;
+                        if (i == findProductByCriteriaRequest.PageNumber)
+                        {
+                            <a class="product-page_number__item product-page_number__item--follow"
+                               href="@Url.Action("FindProductByCriteria", "Home", tmp)">@i</a>
+                        }
+                        else
+                        {
+                            <a class="product-page_number__item"
+                               href="@Url.Action("FindProductByCriteria", "Home", tmp)">@i</a>
+                        }
+                    }
+                }
+                
+                @if (findProductByCriteriaRequest.PageNumber < findProductByCriteriaRequest.PageTotal)
+                    {
+                        FindProductByCriteriaRequest tmp = (FindProductByCriteriaRequest)findProductByCriteriaRequest.Clone();
+                        tmp.PageNumber += 1;
+                        <a class="product-page_number__item" 
+                        href="@Url.Action("FindProductByCriteria", "Home", tmp)"
+                           >
+                            <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="product-page_number__item" >
+                            <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                    }
+                
             </div>
 
         </div>
@@ -155,3 +195,31 @@
 </div>
 
 <script src="~/js/HomeIndex.js"></script>
+<script>
+    function previousPage() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var pageNumber = parseInt(urlParams.get('PageNumber')) || 1;
+    
+        if (pageNumber > 1) {
+            pageNumber--;
+            urlParams.set('PageNumber', pageNumber.toString());
+            console.log(window.location.pathname + '?' + urlParams.toString());
+            window.location.href = window.location.pathname + '?' + urlParams.toString();
+        }
+    }
+    
+    function nextPage() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var pageNumber = parseInt(urlParams.get('PageNumber')) || 1;
+        var pageTotal = parseInt(urlParams.get('PageTotal')) || 1;
+    
+        if (pageNumber < pageTotal) {
+            pageNumber++;
+            urlParams.set('PageNumber', pageNumber.toString());
+            console.log(window.location.pathname + '?' + urlParams.toString());
+            window.location.href = window.location.pathname + '?' + urlParams.toString();
+        }
+    }
+    
+   
+</script>

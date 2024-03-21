@@ -30,7 +30,10 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        ViewBag.findProductByCriteria = new FindProductByCriteriaRequest();
+        ViewBag.findProductByCriteria = new FindProductByCriteriaRequest
+        {
+            PageTotal = (int)Math.Ceiling((double)MyDbContext.Products.Count() / pageSize),
+        };
         homeData.ListProduct = MyDbContext.Products.Take(pageSize).ToList();
         return View(homeData);
     }
@@ -57,7 +60,6 @@ public class HomeController : Controller
     [Route("Default/FindProductByCriteria")]
     public IActionResult FindProductByCriteria(FindProductByCriteriaRequest findProductByCriteriaRequest)
     {
-        ViewBag.findProductByCriteria = findProductByCriteriaRequest;
         IQueryable<Product> products = MyDbContext.Products
             .Include(p => p.Category)
             .AsQueryable();
@@ -109,11 +111,15 @@ public class HomeController : Controller
             }
         }
         
+        findProductByCriteriaRequest.PageTotal = (int)Math.Ceiling((double)products.Count() / pageSize);
+        
         if (findProductByCriteriaRequest.PageNumber != null)
         {
             int pageTo = (findProductByCriteriaRequest.PageNumber - 1) * pageSize;
             products = products.Skip(pageTo).Take(pageSize);
         }
+        
+        ViewBag.findProductByCriteria = findProductByCriteriaRequest;
         
         homeData.ListProduct = products.ToList();
         
