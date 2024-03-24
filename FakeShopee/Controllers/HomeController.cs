@@ -5,7 +5,6 @@ using FakeShopee.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Caching.Memory;
-
 namespace FakeShopee.Controllers;
 
 public class HomeController : Controller
@@ -28,14 +27,16 @@ public class HomeController : Controller
         // AddData();
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+
         ViewBag.findProductByCriteria = new FindProductByCriteriaRequest
         {
             PageTotal = (int)Math.Ceiling((double)MyDbContext.Products.Count() / pageSize),
         };
         homeData.ListProduct = MyDbContext.Products.Take(pageSize).ToList();
         return View(homeData);
+
     }
 
     public async Task<List<Product>> GetAllProduct()

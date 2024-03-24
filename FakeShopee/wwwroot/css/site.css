@@ -3,6 +3,46 @@
   --black-color: #000;
   --text-color: #333;
   --background-color: #F5F5F5;
+<<<<<<< HEAD
+=======
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-size: 10px; /*10px*/
+}
+/* rem: đơn vị tham chiếu tỷ lệ so với phần tử gốc của website  */
+html{
+  font-size: 10px; /*10px*/
+  line-height: 1.6rem;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: var(--background-color);
+}
+
+.grid{
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.grid__row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid__column2{
+  width: calc(100%/6);
+}
+
+.grid__column10{
+  width: calc(100% * 5 / 6);
+>>>>>>> AnhTuanDev
 }
 
 *{
@@ -57,3 +97,10 @@ html{
     display: none;
   }
 }
+<<<<<<< HEAD
+=======
+
+/*.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {*/
+/*  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;*/
+/*}*/
+>>>>>>> AnhTuanDev
