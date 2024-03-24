@@ -24,7 +24,7 @@
 .product__img{
     flex: 2;
     height: 450px;
-    background-image: url(img/sanpham1.jpg);
+    /*background-image: url(img/sanpham1.jpg);*/
     background-size: cover;
     margin: 15px;
 }
@@ -52,6 +52,7 @@
 }
 
 .product__rating{
+    text-decoration: none;
     padding-right: 20px;
     border-right: 1px solid #cccc;
 }
@@ -252,6 +253,9 @@
     opacity: 0.8;
 }
 
+ .star-icon {
+     color: red; /* Màu của sao */
+ }
 
 @media(min-width: 768px) and (max-width: 1024px) {
     .product{

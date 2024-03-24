@@ -440,6 +440,11 @@ public class HomeController : Controller
                 Category = Categorys[4] // Thay thế bằng danh mục thực tế
             },
         };
+
+        foreach (Product product in products)
+        {
+            product.WarehouseQuantity = product.InventoryQuantity - product.SoldQuantity;
+        }
         
         MyDbContext.Products.AddRange(products);
 

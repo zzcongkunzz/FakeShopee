@@ -1,50 +1,55 @@
 ﻿@{
     ViewData["Title"] = "Product Details Page";
     Layout = "_MainLayout";
+    double rating = Model.Rating;
 }
+
+@model Product
 
 <div class="container">
     <div class="product grid">
-        <div class="product__img"></div>
+        <div class="product__img" style="background-image: url(@Model.LinkImage)" ></div>
         <div class="product_box">
-            <span class="product__name">áo khoác nữ sinh Harajuku JK 100% ảnh thật áo khoác nữ sinh Harajuku</span>
+            <span class="product__name">@Model.Name</span>
             <div class="product_box--line2">
                 <div class="product__rating line">
-                    <p class="product__rating--point">3.0</p>
+                    <p class="product__rating--point">@Model.Rating</p>
                     <div class="product__rating-list-star line">
-                        <div class="product__rating--star">
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="product__rating--star">
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="product__rating--star">
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="product__rating--star">
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="product__rating--star">
-                            <i class="fa-solid fa-star"></i>
-                        </div>
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            if (rating >= 1)
+                            {
+                                rating -= 1;
+                                <i class="fa-solid fa-star star-icon"></i>
+                            }
+                            else if(rating >= 0.5)
+                            {
+                                rating -= 0.5;
+                                <i class="fa-regular fa-star-half-stroke star-icon"></i>
+                            }
+                            else
+                            {
+                                <i class="fa-solid fa-star"></i>
+                            }
+                        }
                     </div>
                 </div>
                 <div class="product__sold line">
-                    <div class="product__sold-item">1700</div>
+                    <div class="product__sold-item">@Model.SoldQuantity</div>
                     <div class="product__sold-item">Đã Bán</div>
                 </div>
             </div>
             <div class="product_box--line3">
                 <div class="product__old-price">
                     <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
-                    <span class="product__price">2000000000</span>
+                    <span class="product__price">@Model.Price</span>
                 </div>
                 <div class="product__new-price">
                     <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
-                    <span class="product__price">400000</span>
+                    <span class="product__price">@((double)Model.Price - ((double)Model.Price * (double)Model.Discount / 100))</span>
                 </div>
                 <div class="product__discount">
-                    <div class="product__discount--item">50%</div>
+                    <div class="product__discount--item">@Model.Discount%</div>
                     <div class="product__discount--item">GIẢM</div>
                 </div>
             </div>
@@ -62,13 +67,13 @@
                     <div class="product_box__amouny--item product_box__subtraction">
                         <i class="fa-solid fa-minus"></i>
                     </div>
-                    <input type="Text" class="product_box__amouny--item product_box__amouny--vallue" value="1"></input>
+                    <input type="text" class="product_box__amouny--item product_box__amouny--vallue" value="1"/>
                     <div class="product_box__amouny--item product_box__add">
                         <i class="fa-solid fa-plus"></i>
                     </div>
                 </div>
                 <div class="product_box__warehouse">
-                    <span class="product_box__warehouse--item product_box__warehouse--value">235</span>
+                    <span class="product_box__warehouse--item product_box__warehouse--value">@Model.WarehouseQuantity</span>
                     <span class="product_box__warehouse--item">sản phẩm có sẵn</span>
                 </div>
             </div>
@@ -86,3 +91,5 @@
     </div>
 
 </div>
+
+<script src="~/js/ProductDetails.js"></script>

@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FakeShopee.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FakeShopee.Controllers;
 
 public class ProductDetailsController : Controller
 {
-    // GET
-    public IActionResult Index()
+    private MyDbContext MyDbContext{ get;}
+    private readonly ILogger<ProductDetailsController> _logger;
+
+    public ProductDetailsController(MyDbContext context ,ILogger<ProductDetailsController> logger)
     {
-        return View();
+        _logger = logger;
+        MyDbContext = context;
+    }
+    
+    public IActionResult Index(Guid id)
+    {
+        Product product = MyDbContext.Products.Find(id);
+        return View(product);
     }
 }
