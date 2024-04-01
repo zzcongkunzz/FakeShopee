@@ -14,7 +14,18 @@
     <p>Đăng ký</p>
 </div>
 <div class="las-form" >
-    <div></div>
+    <div class="las-form-error" id="las-form-error" role="alert" style="display: none;">
+        <div class="las-form-error-icon"><svg viewBox="0 0 16 16">
+                <path fill="none" stroke="#FF424F" d="M8 15A7 7 0 108 1a7 7 0 000 14z" clip-rule="evenodd"></path>
+                <rect stroke="none" width="7" height="1.5" x="6.061" y="5" fill="#FF424F" rx=".75"
+                    transform="rotate(45 6.06 5)"></rect>
+                <rect stroke="none" width="7" height="1.5" fill="#FF424F" rx=".75"
+                    transform="scale(-1 1) rotate(45 -11.01 -9.51)"></rect>
+            </svg></div>
+        <div>
+            <div id="las-form-error-text"></div>
+        </div>
+    </div>
     <form method="post" id="las-form-text" >
         <div class="las-form-input-field">
             <div class="las-form-input"><input type="text" id="las-phone"
@@ -70,7 +81,8 @@
     const hidePass = document.getElementById("las-form-hide-pass");
     const hideConfirm = document.getElementById("las-form-hide-confirm");
     const errorConfirm = document.getElementById("las-form-confirm-error");
-
+    const errorForm = document.getElementById("las-form-error");
+    const errorText = document.getElementById("las-form-error-text");
     hidePass.addEventListener("click", ()=>{
         if(password.type==='password'){
             password.type = 'text';
@@ -93,7 +105,7 @@
  
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        console.log("đã chạy5");
+         errorForm.style.display = "none";
         if(password.value!==confirmPassword.value){
    
             errorConfirm.innerHTML = "Mật khẩu không khớp";
@@ -102,6 +114,12 @@
             errorConfirm.innerHTML = "";
         }
         
+        console.log(JSON.stringify({
+              fullName: fullname.value.toString(),
+              password: password.value.toString(),
+              email: email.value.toString(),
+              phoneNumber: phone.value.toString(),    
+          }));
         await fetch("/LoginAndSignup/Register", {
             method: "POST",
             headers: {
@@ -109,22 +127,33 @@
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({
-                      fullName: 'John Doe',
-                      password: 'password123',
-                      email: 'john.doe@example.com',
-                      phoneNumber: '123456789',    
+                      fullName: fullname.value.toString(),
+                      password: password.value.toString(),
+                      email: email.value.toString(),
+                      phoneNumber: phone.value.toString(),    
                   }),
         })
         .then(response => {
             // Xử lý response
+            console.log(response)
+            
             if (!response.ok) {
               throw new Error('Có lỗi khi gửi request: ' + response.status);
+              return;
             }
+            
             return response.json();
         })
         .then(data => {
             // Xử lý dữ liệu nhận được từ server
             console.log('Dữ liệu nhận được:', data);
+            if(data?.id){
+                window.location.href = `/LoginAndSignup/Login/${data.id}`;       
+            }
+            else {
+               errorForm.style.display = "flex";
+               errorText.innerHTML = "email hoặc số điện thoại đã tồn tại";   
+            }
         })
         .catch(error => {
             // Xử lý lỗi nếu có

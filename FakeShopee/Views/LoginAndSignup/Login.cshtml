@@ -26,13 +26,33 @@
     </div>
     <form id="form">
         <div class="las-form-input-field">
-            <div class="las-form-input"><input type="text" placeholder="Email/Số điện thoại" autocomplete="on"
-                    id="username" name="username"></div>
+            <div class="las-form-input">
+                @if (@Model != null && @Model.Email != null)
+                {
+                    <input 
+                        asp-for="Email"
+                        type="text" 
+                        placeholder="Email/Số điện thoại"
+                        autocomplete="on"
+                        id="username" name="username"
+                        />
+                }
+                else
+                {
+                    <input 
+                        asp-for="PhoneNumber"
+                        type="text" 
+                        placeholder="Email/Số điện thoại"
+                        autocomplete="on"
+                        id="username" name="username"
+                    />
+                }
+            </div>
             <span class="las-form-input-error" id="error-username"></span>
         </div>
         <div class="las-form-input-field">
             <div class="las-form-input">
-                <input type="password" placeholder="Mật khẩu" autocomplete="current-password" id="password"
+                <input asp-for="Password" type="password" placeholder="Mật khẩu" autocomplete="current-password" id="password"
                     name="password">
                 <div class="las-form-visible" id="hide-pass"><svg fill="none" viewBox="0 0 20 10" class="_340FWs">
                         <path stroke="none" fill="#000" fill-opacity=".54"
@@ -70,12 +90,6 @@
         }
     })
 
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -92,7 +106,8 @@
         }else{
             errorPassword.innerHTML = "";
         }
-        const response = await fetch("/LoginAndSignup/Login", {
+        
+        await fetch("/LoginAndSignup/Login", {
             method: "POST",
             headers: {
                 //"Content-Type": "application/json",
@@ -103,13 +118,28 @@
                 password: password.value.toString()
             })
         })
-        const text = await response.text();
-        if(response.status===200){
-            setCookie("token", text, 3);
-            window.location.replace("/Home");
-        }else{
-            errorForm.style.display = "flex";
-            errorText.innerHTML = text;
-        }
+        .then(response => {
+            // Xử lý response
+            console.log(response)
+            
+            if (!response.ok) {
+              throw new Error('Có lỗi khi gửi request: ' + response.status);
+              return;
+            }
+            
+            if (response.status === 204){
+                errorForm.style.display = "flex";
+                errorText.innerHTML = "Tài khoản hoặc mật khẩu không chính xác";           
+            }
+            else if (response.status === 200){
+                window.location.href = "/";
+            }
+           
+        })
+        .catch(error => {
+            // Xử lý lỗi nếu có
+            console.error('Đã xảy ra lỗi:', error);
+        });
+     
     })
 </script>
