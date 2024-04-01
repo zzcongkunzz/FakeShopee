@@ -9,7 +9,7 @@ builder.Services.AddDbContext<MyDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("MyDb"));
 });
-builder.Services.AddMemoryCache();
+// builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 var app = builder.Build();
 

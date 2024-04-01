@@ -37,14 +37,14 @@
                     0
                 </span>
                 <div id="header-mix__cart--main" class="">
-                    <img class="header-cart--img" src="img/pngfind.com-cart-png-2727925.png"
+                    <img class="header-cart--img" src="@Url.Content("~/img/pngfind.com-cart-png-2727925.png")"
                          alt="lỗi ảnh">
                     <p class="header-cart--txt">
                         Chưa có sản phẩm
                     </p>
                     <h4 class="header-mix__cart-heading">Sản phẩm đã thêm</h4>
                     <div class="header-mix__cart-list-item">
-                        <partial name="HeaderCarProduct"/>
+                        @* <partial name="HeaderCarProduct" /> *@
                     </div>
                     <a href="" class="header-mix__cart-list-button">Xem Giỏ Hàng</a>
 
@@ -53,3 +53,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    // const RenderCartItem = (Cart) => {
+    //     console.log(Cart);
+    //     return `<a class="header-mix__cart-product-link" href="http://localhost:5295/ProductDetails/Index/${Cart.product.id}" >` +
+    //                '<div class="header-mix__cart-product-item">' +
+    //                    '<div class="header-mix__cart-product-item--img" ' +
+    //                         `style="background-image: url(${Cart.product.linkImage})"></div>` +
+    //                    `<div class="header-mix__cart-product-item--name-product">${Cart.product.name}</div>` +
+    //                    '<div class="header-mix__cart-product-item--combox-price">' +
+    //                        '<span class="header-mix__cart-product-item--unit">đ</span>' +
+    //                        `<span class="header-mix__cart-product-item--price">${(100 - Cart.product.discount)/100*Cart.product.price}</span>` +
+    //                    '</div>' +
+    //                '</div>' +
+    //             '</a>';
+    // }
+
+    
+    
+</script>

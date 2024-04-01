@@ -79,7 +79,7 @@
             </div>
 
             <div class="product_box-line6">
-                <a id="btnThemGioHang" href="" class="product_box__add-cart">
+                <a id="btnThemGioHang" onclick="ThemVaoGioHang('@Model.Id')" class="product_box__add-cart">
                     <div class="product_box__add-cart--icon">
                         <i class="fa-solid fa-cart-plus"></i>
                     </div>
@@ -93,3 +93,38 @@
 </div>
 
 <script src="~/js/ProductDetails.js"></script>
+<script>
+    const ThemVaoGioHang = async (productID) => {
+        let check = 0;
+        let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = () => {
+                // console.log(xhttp)
+                if (xhttp.readyState == 4 && xhttp.status == 200){                 
+                    check = 1;
+                } 
+            }
+        
+            xhttp.open("GET", "http://localhost:5295/User/GetUserLogin/", false);
+           await xhttp.send();
+     
+        if (check === 1){
+            const quantity = document.querySelector(".product_box__amouny--vallue").value;
+                    
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = () => {
+                    if (xhttp.readyState == 4 && xhttp.status == 200){
+                       
+                        console.log(xhttp.responseText);
+                        alert("Thêm vào giỏ hàng thành công");
+                    }
+                }
+            
+                xhttp.open("GET", `http://localhost:5295/ProductDetails/AddCart?productId=${productID}&quantity=${quantity}`, false);
+                await xhttp.send();
+                GetCartMinUser();
+        }
+        else{
+            window.location.href = "/LoginAndSignup/Login"
+        }
+    }
+</script>

@@ -5,6 +5,7 @@ using FakeShopee.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 
 namespace FakeShopee.Controllers;
 
@@ -27,12 +28,14 @@ public class HomeController : Controller
         homeData.ListCategory = MyDbContext.Categories
             .OrderByDescending(category => category.Name)
             .ToList();
-
-        DataApp dataApp = new DataApp(context);
+        
+        // DataApp dataApp = new DataApp(context);
     }
 
     public IActionResult Index()
     {
+        
+
         ViewBag.findProductByCriteria = new FindProductByCriteriaRequest
         {
             PageTotal = (int)Math.Ceiling((double)MyDbContext.Products.Count() / pageSize),
