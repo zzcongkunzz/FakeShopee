@@ -1,0 +1,35 @@
+﻿@model Cart
+<div class="CartItem" idCart="@Model.Id">
+    <div class="CartItem__img"
+         style="background-image: url('@Url.Content(@Model.Product.LinkImage)')">
+    </div>
+    <span class="CartItem__name">@Model.Product.Name</span>
+    <div class="CartItem__priceBox">
+        <div class="product__old-price">
+            <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
+            <span class="product__price">@Model.Product.Price</span>
+        </div>
+        <div class="product__new-price">
+            <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
+            <span class="product__price">@((double)(100 - Model.Product.Discount) / 100 * Model.Product.Price)</span>
+        </div>
+    </div>
+    <div class="product_box__amouny">
+        <div class="product_box__amouny--item product_box__subtraction">
+            <i class="fa-solid fa-minus"></i>
+        </div>
+        <input type="text" class="product_box__amouny--item product_box__amouny--vallue" value="@Model.Quantity"/>
+        <div class="product_box__amouny--item product_box__add">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+    </div>
+    <div class="CartItem__TotalPrice">
+        <div class="product__new-price">
+            <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
+            <span class="product__price">@((double)(100 - Model.Product.Discount) / 100 * Model.Product.Price * Model.Quantity) </span>
+        </div>
+    </div>
+    <div class="CartItem__Action">
+        <a href="#" >Xóa </a>
+    </div>
+</div>

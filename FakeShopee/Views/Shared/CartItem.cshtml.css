@@ -1,0 +1,112 @@
+﻿.CartItem{
+    margin-top: 20px;
+    display: flex;
+    background-color: #ffffff;
+    width: 90%;
+}
+
+.CartItem__img{
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    border: 1px solid rgba(173, 171, 171, 0.6);
+    border-radius: 1px;
+}
+
+.CartItem__name{
+    padding: 5px;
+    font-size: 1.4rem;
+    margin-left: 5px;
+    flex: 2;
+}
+
+.CartItem__priceBox{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+}
+
+.product__old-price{
+    color: #7c7c7c;
+    padding-left: 15px;
+    display: flex;
+    font-size: 1.4rem;
+    text-decoration: line-through;
+}
+
+.product__new-price{
+    color: #ee4d2d;
+    font-weight: 400;
+    padding-left: 15px;
+    display: flex;
+    font-size: 2.5rem;
+}
+
+.product__old-price .product__currency-unit{
+    display: block;
+    font-size: 1rem;
+    margin-top: -1px;
+    text-decoration: underline;
+}
+
+.product__new-price .product__currency-unit{
+    display: block;
+    font-size: 1.8rem;
+    margin-top: -1px;
+    text-decoration: underline;
+}
+
+.product__price{
+    margin-left: 2px;
+}
+
+.CartItem__TotalPrice{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+}
+
+.product_box__amouny{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35px;
+}
+
+.product_box__amouny--item{
+    height: 32px;
+    width: 32px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #757575;
+}
+.product_box__amouny--item:hover{
+    cursor: pointer;
+}
+
+.product_box__amouny--vallue{
+    width: 50px;
+}
+.product_box__amouny--vallue:hover{
+    cursor: text;
+}
+.CartItem__Action{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+.CartItem__Action a{
+    text-decoration: none;
+    font-size: 1.4rem;
+    padding: 10px 15px;
+    background: red;
+    color: white;
+    border-radius: 2px;
+}

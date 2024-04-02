@@ -68,12 +68,11 @@ const GetCartMinUser = async () => {
 
     xhttp.open("GET", "http://localhost:5295/User/GetCartUser/", false);
     await xhttp.send();
-    HeaderCartProduct();
     MoneyFomatCartItem();
     CheckNameProductCartItem();
 }
 
-const CheckUserLogin = () => {
+const CheckUserLogin = async () => {
     const dangki = document.getElementById("dangki");
     const dangnhap = document.getElementById("dangnhap");
     const User = document.getElementById("User");
@@ -92,6 +91,7 @@ const CheckUserLogin = () => {
             UserImg.src = response.fullName === "zzcongkunzz" ? "img/avata.jpg" : ""
             UserName.innerHTML = response.fullName;
             GetCartMinUser();
+            
         }
         else {
             dangki.style.display = "block";
@@ -100,8 +100,9 @@ const CheckUserLogin = () => {
         }
     }
 
-    xhttp.open("GET", "http://localhost:5295/User/GetUserLogin/", true);
-    xhttp.send();
+    xhttp.open("GET", "http://localhost:5295/User/GetUserLogin/", false);
+    await xhttp.send();
+    HeaderCartProduct();
 }
 CheckUserLogin();
 
@@ -121,5 +122,4 @@ const DangXuat = () => {
 }
 
 
-HeaderCartProduct();
 // Write your JavaScript code.

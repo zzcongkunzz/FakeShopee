@@ -53,6 +53,55 @@ public class UserController : Controller
         
     }
 
+    [HttpGet]
+    public IActionResult ViewCart()
+    {
+        var serializedUser = HttpContext.Session.GetString("User");
+        if (serializedUser != null)
+        {
+            Users user = JsonConvert.DeserializeObject<Users>(serializedUser);
+            List<Cart> carts = MyDbContext.Carts
+                .Include(cart => cart.Customer)
+                .Include(cart => cart.Product)
+                .Where(cart => cart.Customer.Id == user.Id)
+                .ToList();
+            
+            return View("Cart", carts);
+        }
+        else
+        {
+            return RedirectToAction("Login", "LoginAndSignup");
+        }
+        return View("Cart");
+    }
+
+    [HttpGet]
+    public IActionResult DeleteCart(Guid cartID)
+    {
+        Cart cart = MyDbContext.Carts.Find(cartID);
+        MyDbContext.Carts.Remove(cart);
+        MyDbContext.SaveChanges();
+        return Ok();
+    }
+    
+    [HttpPost]
+    public IActionResult ChangeCart(Guid cartID, int quantity)
+    {
+        Cart cart = MyDbContext.Carts
+            .Include(cart1 => cart1.Product)
+            .FirstOrDefault(cart1 => cart1.Id == cartID);
+        if (quantity > cart.Product.WarehouseQuantity)
+        {
+            cart.Quantity = cart.Product.WarehouseQuantity;
+        }
+        else
+        {
+            cart.Quantity = quantity;
+        }
+        MyDbContext.SaveChanges();
+        return Ok(cart);
+    }
+
     public IActionResult LogOut()
     {
         HttpContext.Session.Remove("User");

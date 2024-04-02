@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Cart Page";
+    Layout = "_MainLayout";
+    double totalPrice = 0;
+}
+@model List<Cart>
+
+<div class="cart_content">
+    @if (@Model != null && Model.Count > 0)
+    {
+        foreach (Cart cart in @Model)
+        {
+            <partial name="CartItem" model="cart" />
+            double price = (double)(100 - cart.Product.Discount) / 100 * cart.Product.Price * cart.Quantity;
+            totalPrice += price;
+        }
+    }
+    
+    <div class="cart_footer">
+        <span class="text" >Tổng tiền </span>
+        <div class="CartItem__TotalPricePay">
+            <div class="product__new-price">
+                <span class="product__currency-unit">đ</span> <!-- đơn vị tiền tệ -->
+                <span class="product__price">@totalPrice</span>
+            </div>
+        </div>
+         <a class="cart_footer_pay" href="#">Thanh Toán</a>
+    </div>
+</div>
+
+<script>
+    function MoneyFomat() {
+        var Price = document.getElementsByClassName("product__price");
+        for (var i of Price) {
+            // console.log(Price);
+            var x = Number(i.innerHTML);
+            i.innerHTML = x.toLocaleString('vi-VN');
+        }
+    }
+    
+    MoneyFomat();
+    
+    lisCartItem = document.querySelectorAll(".CartItem");
+    
+    
+    lisCartItem.forEach(cartItem => {
+         const deletebtn = cartItem.querySelector('.CartItem__Action a');
+
+         var soLuongObj = cartItem.querySelector(".product_box__amouny--vallue");
+
+         const cartID = cartItem.getAttribute('idCart'); 
+         
+          deletebtn.addEventListener('click', function(event) {
+             // Ngăn chặn hành vi mặc định của thẻ a (chẳng hạn chuyển hướng trang)
+             event.preventDefault();
+
+             console.log("Xóa sản phẩm có ID: " + cartItem.getAttribute('idCart'));
+
+             xhttp = new XMLHttpRequest();
+             xhttp.onreadystatechange = () => {
+                 if (xhttp.readyState == 4 && xhttp.status == 200){
+
+                     console.log(xhttp.responseText);
+                     cartItem.remove();
+                     alert("Xóa thành công");
+                     GetCartMinUser();
+                     CartItemTotalPay();
+                 }
+             }
+
+             xhttp.open("GET", `http://localhost:5295/User/DeleteCart?cartID=${cartID}`, false);
+             xhttp.send();
+         });
+
+          soLuongObj.onkeyup = (e) => {
+                var input = e.target.value;
+                var regex = /^[0-9]+$/;
+                
+                if (!regex.test(input)) {
+                    soLuongObj.value = input.replace(/\D/g, '');
+                }
+                
+                if (input === "" || input === "0"){                   
+                    soLuongObj.value = "1";
+                }
+          }
+
+          soLuongObj.onchange = async (e) => {
+              
+              const quantityNew = e.target.value;
+              xhttp = new XMLHttpRequest();
+               xhttp.onreadystatechange = () => {
+                   if (xhttp.readyState == 4 && xhttp.status == 200){
+                       
+                        const cart =  JSON.parse(xhttp.responseText);
+                        e.target.value = cart?.quantity;
+                        let TotalPricce = (100 - cart?.product.discount)/100 * cart?.product.price * cart.quantity;
+                        // console.log(TotalPricce.toLocaleString('vi-VN'));
+                        cartItem.querySelector(".CartItem__TotalPrice .product__price").innerHTML = TotalPricce.toLocaleString('vi-VN');
+                        CartItemTotalPay();
+                        GetCartMinUser();
+                   }
+               }
+    
+               xhttp.open("POST", `http://localhost:5295/User/ChangeCart`, false);
+               xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+               xhttp.send(`cartID=${cartID}&quantity=${quantityNew}`);
+          }
+    })
+    
+    function CartItemTotalPay(){
+        const tongTienThanhToanObj = document.querySelector(".CartItem__TotalPricePay .product__price");
+        let tongTienThanhToan = 0;
+        const ls = document.querySelectorAll(".CartItem .CartItem__TotalPrice .product__price")
+        
+        ls.forEach(item => {
+            // Loại bỏ dấu chấm trong chuỗi
+            var numberWithoutDots = item.innerHTML.replace(/\./g, "");
+            numberWithoutDots = numberWithoutDots.replace(",", ".");
+            
+            tongTienThanhToan += Number(numberWithoutDots)
+        })
+        console.log(tongTienThanhToan);
+        tongTienThanhToanObj.innerHTML = tongTienThanhToan.toLocaleString('vi-VN');
+    }
+</script>

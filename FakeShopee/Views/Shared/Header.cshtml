@@ -30,7 +30,7 @@
                 </form>
             </div>
             <div class="header-mix__cart">
-                <a href="./LoginAndSignup/shoppingcart/shoppingcart.html">
+                <a href="@Url.Action("ViewCart", "User")">
                     <i class="fas fa-shopping-cart icon--cart"></i>
                 </a>
                 <span class="header-mix__cart-notice">
@@ -46,7 +46,7 @@
                     <div class="header-mix__cart-list-item">
                         @* <partial name="HeaderCarProduct" /> *@
                     </div>
-                    <a href="" class="header-mix__cart-list-button">Xem Giỏ Hàng</a>
+                    <a href="@Url.Action("ViewCart", "User")" class="header-mix__cart-list-button">Xem Giỏ Hàng</a>
 
                 </div>
             </div>
