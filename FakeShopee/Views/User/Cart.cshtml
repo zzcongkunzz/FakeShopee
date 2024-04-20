@@ -70,6 +70,8 @@
 
              xhttp.open("GET", `http://localhost:5295/User/DeleteCart?cartID=${cartID}`, false);
              xhttp.send();
+             window.location.reload();
+             
          });
 
           soLuongObj.onkeyup = (e) => {
@@ -105,6 +107,7 @@
                xhttp.open("POST", `http://localhost:5295/User/ChangeCart`, false);
                xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                xhttp.send(`cartID=${cartID}&quantity=${quantityNew}`);
+               window.location.reload();
           }
     })
     

@@ -23,18 +23,25 @@ function CheckNameProductCartItem() {
 function HeaderCartProduct() {
     var HeaderCartProduct = document.getElementById("header-mix__cart--main");
     var HeaderCartProductItem = document.getElementsByClassName("header-mix__cart-product-link");
+    console.log('HeaderCartProductItem', HeaderCartProductItem);
     if (HeaderCartProductItem[0] == null) {
         HeaderCartProduct.classList.add("header-mix__cart-list--no-cart");
+        HeaderCartProduct.classList.remove("header-mix__cart-list");
     }
-    else HeaderCartProduct.classList.add("header-mix__cart-list");
+    else {
+        HeaderCartProduct.classList.remove("header-mix__cart-list--no-cart");
+        HeaderCartProduct.classList.add("header-mix__cart-list");
+    } 
 }
 
 const RenderCartItem = (Cart) => {
     // console.log(Cart);
+    let modifiedLinkImage = Cart?.product?.linkImage.substring(1);
+    
     return `<a class="header-mix__cart-product-link" href="http://localhost:5295/ProductDetails/Index/${Cart.product.id}" >` +
         '<div class="header-mix__cart-product-item">' +
         '<div class="header-mix__cart-product-item--img" ' +
-        `style="background-image: url(${Cart.product.linkImage})"></div>` +
+        `style="background-image: url(${modifiedLinkImage})"></div>` +
         `<div class="header-mix__cart-product-item--name-product">${Cart.product.name}</div>` +
         '<div class="header-mix__cart-product-item--combox-price">' +
         '<span class="header-mix__cart-product-item--unit">đ</span>' +
@@ -68,8 +75,11 @@ const GetCartMinUser = async () => {
 
     xhttp.open("GET", "http://localhost:5295/User/GetCartUser/", false);
     await xhttp.send();
+    
+    await HeaderCartProduct();
     MoneyFomatCartItem();
     CheckNameProductCartItem();
+    
 }
 
 const CheckUserLogin = async () => {
@@ -88,7 +98,7 @@ const CheckUserLogin = async () => {
             User.style.display = "block";
             const UserImg = document.querySelector("#User > img");
             const UserName = document.querySelector("#User .userName")
-            UserImg.src = response.fullName === "zzcongkunzz" ? "img/avata.jpg" : ""
+            UserImg.src = response.fullName === "Đặng Thành Công" ? "/img/avata.jpg" : ""
             UserName.innerHTML = response.fullName;
             GetCartMinUser();
             
@@ -102,7 +112,6 @@ const CheckUserLogin = async () => {
 
     xhttp.open("GET", "http://localhost:5295/User/GetUserLogin/", false);
     await xhttp.send();
-    HeaderCartProduct();
 }
 CheckUserLogin();
 

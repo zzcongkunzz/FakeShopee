@@ -37,7 +37,7 @@ public class DataApp
             {
                 Name = RoleType.STAFF.GetDescription()
             },
-        new UserGroup
+            new UserGroup
             {
                 Name = RoleType.CUSTOMER.GetDescription()
             }
@@ -57,7 +57,7 @@ public class DataApp
             new Users
             {
               FullName  = "Đặng Thành Công",
-              UserGroup = userGroups[2],
+              UserGroup = userGroups[0],
               PhoneNumber = "0914133719",
               Email = "dangcong200502@gmail.com",
               Password = "1",
@@ -97,7 +97,7 @@ public class DataApp
             new Product()
             {
                 Name = "áo khoác nữ sinh Harajuku JK 100% ảnh thật",
-                LinkImage = "https://i.imgur.com/SH9AozR.jpg",
+                LinkImage = "~/img/sanpham1.jpg",
                 Rating = 4.5,
                 Favorite = true,
                 Price = 100000,
@@ -110,7 +110,7 @@ public class DataApp
             new Product
             {
                 Name = "áo thun siêu hot",
-                LinkImage = "https://i.imgur.com/kJI23qi.jpg",
+                LinkImage = "~/img/sanpham2.jpg",
                 Rating = 4,
                 Favorite = true,
                 Price = 150000,
@@ -123,7 +123,7 @@ public class DataApp
             new Product
             {
                 Name = "áo thun nam siêu hot",
-                LinkImage = "https://i.imgur.com/Bys2h2s.jpg",
+                LinkImage = "~/img/sanpham3.jpg",
                 Rating = 4,
                 Favorite = true,
                 Price = 150000,
@@ -136,7 +136,7 @@ public class DataApp
             new Product
             {
                 Name = "áo thun nam siêu hot 2",
-                LinkImage = "https://i.imgur.com/Bys2h2s.jpg",
+                LinkImage = "~/img/sanpham3.jpg",
                 Rating = 4.4,
                 Favorite = true,
                 Price = 200000,
@@ -149,7 +149,7 @@ public class DataApp
             new Product
             {
                 Name = "áo thun dài tay nữ cá tính",
-                LinkImage = "https://i.imgur.com/XKiLgrr.jpg",
+                LinkImage = "~/img/sanpham4.jpg",
                 Rating = 5,
                 Favorite = true,
                 Price = 90000,
@@ -162,7 +162,7 @@ public class DataApp
             new Product
             {
                 Name = "ốp lưng điện thoại iPhone dễ thương",
-                LinkImage = "https://i.imgur.com/jisHoPt.png",
+                LinkImage = "~/img/sanpham5.jpg",
                 Rating = 5,
                 Favorite = true,
                 Price = 50000,
@@ -175,7 +175,7 @@ public class DataApp
             new Product
             {
                 Name = "điện thoại iPhone 11 chính hãng giá rẻ",
-                LinkImage = "https://i.imgur.com/FU9aHWK.jpg",
+                LinkImage = "~/img/sanpham6.jpg",
                 Rating = 1.5,
                 Favorite = false,
                 Price = 15000000,
@@ -188,7 +188,7 @@ public class DataApp
             new Product
             {
                 Name = "điện thoại iPhone 11 chính hãng giá đắt",
-                LinkImage = "https://i.imgur.com/FU9aHWK.jpg",
+                LinkImage = "~/img/sanpham6.jpg",
                 Rating = 1.5,
                 Favorite = false,
                 Price = 500000000,
@@ -201,7 +201,7 @@ public class DataApp
             new Product
             {
                 Name = "tai nghe hình tai mèo màu xanh cute",
-                LinkImage = "https://i.imgur.com/S0zMK33.jpg",
+                LinkImage = "~/img/sanpham7.jpg",
                 Rating = 4.5,
                 Favorite = true,
                 Price = 300000,
@@ -214,7 +214,7 @@ public class DataApp
             new Product
             {
                 Name = "đèn livestream sịn sò",
-                LinkImage = "https://i.imgur.com/D4aJAqR.jpg",
+                LinkImage = "~/img/sanpham8.jpg",
                 Rating = 4.5,
                 Favorite = true,
                 Price = 366000,
@@ -227,7 +227,7 @@ public class DataApp
             new Product
             {
                 Name = "robot hút bụi thông minh",
-                LinkImage = "https://i.imgur.com/bMKor2H.jpg",
+                LinkImage = "~/img/sanpham9.jpg",
                 Rating = 0.5,
                 Favorite = false,
                 Price = 150000,
@@ -240,7 +240,7 @@ public class DataApp
             new Product
             {
                 Name = "tủ lạnh 2 ngăn dung tích lớn cho đại gia đình",
-                LinkImage = "https://i.imgur.com/BuPTCnQ.jpg",
+                LinkImage = "~/img/sanpham10.jpg",
                 Rating = 5,
                 Favorite = true,
                 Price = 20000000,
@@ -253,7 +253,7 @@ public class DataApp
             new Product
             {
                 Name = "tủ lạnh 3 ngăn dung tích lớn cho đại gia đình",
-                LinkImage = "https://i.imgur.com/BuPTCnQ.jpg",
+                LinkImage = "~/img/sanpham11.jpg",
                 Rating = 5,
                 Favorite = true,
                 Price = 20000000,
@@ -266,7 +266,7 @@ public class DataApp
             new Product
             {
                 Name = "máy giặt cửa ngang siêu tiết kiệm nước",
-                LinkImage = "https://i.imgur.com/DsMUwrc.jpg",
+                LinkImage = "~/img/sanpham12.jpg",
                 Rating = 3,
                 Favorite = false,
                 Price = 8200000,
@@ -279,7 +279,7 @@ public class DataApp
             new Product
             {
                 Name = "máy lọc nước Khangkaru hàng chính hãng",
-                LinkImage = "https://i.imgur.com/QrycWGx.jpg",
+                LinkImage = "~/img/sanpham12.jpg",
                 Rating = 3.6,
                 Favorite = true,
                 Price = 5200000,
@@ -292,7 +292,7 @@ public class DataApp
             new Product
             {
                 Name = "máy tính HP bảo hành trọn đời",
-                LinkImage = "https://i.imgur.com/MSfcvUq.jpg",
+                LinkImage = "~/img/sanpham13.jpg",
                 Rating = 4.6,
                 Favorite = true,
                 Price = 9200000,
@@ -305,7 +305,7 @@ public class DataApp
             new Product
             {
                 Name = "macbook hạt rẻ ngon",
-                LinkImage = "https://i.imgur.com/YWFohYq.jpg",
+                LinkImage = "~/img/sanpham14.jpg",
                 Rating = 2.6,
                 Favorite = false,
                 Price = 9230000,
@@ -318,7 +318,7 @@ public class DataApp
             new Product
             {
                 Name = "macbook hạt rẻ ngon 2",
-                LinkImage = "https://i.imgur.com/YWFohYq.jpg",
+                LinkImage = "~/img/sanpham14.jpg",
                 Rating = 2.6,
                 Favorite = false,
                 Price = 9930000,
@@ -331,7 +331,7 @@ public class DataApp
             new Product
             {
                 Name = "macbook hạt rẻ ngon 3",
-                LinkImage = "https://i.imgur.com/YWFohYq.jpg",
+                LinkImage = "~/img/sanpham14.jpg",
                 Rating = 2.6,
                 Favorite = false,
                 Price = 8830000,
@@ -344,7 +344,7 @@ public class DataApp
             new Product
             {
                 Name = "dàn PC siêu chất lượng cho game thủ",
-                LinkImage = "https://i.imgur.com/ldXj8CM.png",
+                LinkImage = "~/img/sanpham15.jpg",
                 Rating = 4.6,
                 Favorite = true,
                 Price = 52230000,
@@ -356,11 +356,11 @@ public class DataApp
             },
             new Product
             {
-                Name = "máy tính DELL gọn nhẹ",
-                LinkImage = "https://i.imgur.com/ch6LU8h.jpg",
+                Name = "máy đo chỉ số SpO2 chính xác",
+                LinkImage = "~/img/sanpham17.jpg",
                 Rating = 4.6,
                 Favorite = true,
-                Price = 32000000,
+                Price = 320000,
                 Discount = 25,
                 InventoryQuantity = 1000,
                 SoldQuantity = 550,
@@ -370,7 +370,7 @@ public class DataApp
             new Product
             {
                 Name = "máy đo chỉ số SpO2 chính xác",
-                LinkImage = "https://i.imgur.com/PzxWaZS.jpg",
+                LinkImage = "~/img/sanpham17.jpg",
                 Rating = 4.6,
                 Favorite = false,
                 Price = 300000,
@@ -383,7 +383,7 @@ public class DataApp
             new Product
             {
                 Name = "máy đo nhiệt độ chất lượng cao",
-                LinkImage = "https://i.imgur.com/Koztkhp.jpg",
+                LinkImage = "~/img/sanpham18.jpg",
                 Rating = 1.6,
                 Favorite = false,
                 Price = 330000,
@@ -396,7 +396,7 @@ public class DataApp
             new Product
             {
                 Name = "nước xát khuẩn tay, loại bỏ 99,99% vi khuẩn",
-                LinkImage = "https://i.imgur.com/KHSaNOp.jpg",
+                LinkImage = "~/img/sanpham19.jpg",
                 Rating = 1.6,
                 Favorite = false,
                 Price = 330000,
@@ -409,7 +409,7 @@ public class DataApp
             new Product
             {
                 Name = "khẩu trang 4 lớp chắc chắn, bảo vệ bạn và mọi người",
-                LinkImage = "https://i.imgur.com/c7sfKX5.jpg",
+                LinkImage = "~/img/sanpham20.jpg",
                 Rating = 4,
                 Favorite = false,
                 Price = 100000,
